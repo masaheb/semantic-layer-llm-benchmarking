@@ -36,4 +36,4 @@ models:
     example:
       +materialized: view
 seeds:
-  schema: _seed
+  +schema: _seed
