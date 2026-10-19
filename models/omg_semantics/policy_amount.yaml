@@ -1,48 +1,55 @@
-semantic_models:
+models:
   - name: policy_amount
-    model: ref('policy_amount')
+    semantic_model:
+      enabled: true
     description: "A model representing the amounts associated with insurance policies, including details of the policy coverage and the insured object."
-    defaults:
-      agg_time_dimension: effective_date
-    entities:
-      - name: policy_amount
-        type: primary
-        expr: Policy_Amount_Identifier
-      - name: geographic_location
-        type: foreign
-        expr: Geographic_Location_Identifier
-      - name: policy
-        type: foreign
-        expr: Policy_Identifier
-      - name: policy_coverage_detail
-        type: foreign
-        expr: Policy_Coverage_Detail_Identifier
-      - name: insurable_object
-        type: foreign
-        expr: Insurable_Object_Identifier
-    dimensions:
+    agg_time_dimension: effective_date
+    columns:
+      - name: Policy_Amount_Identifier
+        entity:
+          type: primary
+          name: policy_amount
+      - name: Geographic_Location_Identifier
+        entity:
+          type: foreign
+          name: geographic_location
+      - name: Policy_Identifier
+        entity:
+          type: foreign
+          name: policy
+      - name: Policy_Coverage_Detail_Identifier
+        entity:
+          type: foreign
+          name: policy_coverage_detail
+      - name: Insurable_Object_Identifier
+        entity:
+          type: foreign
+          name: insurable_object
       - name: effective_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: amount_type_code
-        type: categorical
+        dimension:
+          type: categorical
       - name: earning_begin_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: earning_end_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: insurance_type_code
-        type: categorical
-      - name: policy_amount_dim
-        type: categorical
-        expr: Policy_Amount
-    measures:
+        dimension:
+          type: categorical
+      - name: Policy_Amount
+        dimension:
+          type: categorical
+          name: policy_amount_dim
+    metrics:
       - name: total_policy_amount
         description: "The total amount associated with the policy."
         agg: sum
         expr: Policy_Amount
-        create_metric: true
+        type: simple

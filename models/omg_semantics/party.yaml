@@ -1,32 +1,29 @@
-semantic_models:
+models:
   - name: party
-    model: ref('party')
+    semantic_model:
+      enabled: true
     description: "A table containing party information, including names, active dates, and types."
-    defaults:
-      agg_time_dimension: begin_date  # Assuming Begin_Date is the most relevant time dimension for aggregation 
-
-    entities:
-      - name: party
-        type: primary
-        expr: Party_Identifier
-
-    dimensions:
-      - name: party_name
-        type: categorical
-        expr: Party_Name
-
-      - name: begin_date
-        type: time
-        type_params:
-          time_granularity: day
-        expr: Begin_Date
-
-      - name: end_date
-        type: time
-        type_params:
-          time_granularity: day
-        expr: End_Date
-
-      - name: party_type_code
-        type: categorical
-        expr: Party_Type_Code
+    agg_time_dimension: begin_date
+    columns:
+      - name: Party_Identifier
+        entity:
+          type: primary
+          name: party
+      - name: Party_Name
+        dimension:
+          type: categorical
+          name: party_name
+      - name: Begin_Date
+        dimension:
+          type: time
+          name: begin_date
+        granularity: day
+      - name: End_Date
+        dimension:
+          type: time
+          name: end_date
+        granularity: day
+      - name: Party_Type_Code
+        dimension:
+          type: categorical
+          name: party_type_code

@@ -1,28 +1,26 @@
-semantic_models:
+models:
   - name: agreement_party_role
-    model: ref('agreement_party_role')
-    entities:
-      - name: policy
-        type: primary
-        expr: agreement_identifier
+    semantic_model:
+      enabled: true
+    columns:
+      - name: agreement_identifier
+        entity:
+          type: primary
+          name: policy
       - name: party_identifier
-        description: "Use this in coordination with filter on party_role_code to refer to agent_id or policyholder_id "
-        type: foreign
-    dimensions:
-      - name: party_identifier_dim
-        description: "Use this in coordination with filter on party_role_code to refer to agent_id or policyholder_id "
-        type: categorical
-        expr: party_identifier
+        entity:
+          type: foreign
+        dimension:
+          type: categorical
+          name: party_identifier_dim
       - name: effective_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: expiration_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: party_role_code
-        description: "Must filter using this dimension if referring to agents or policyholders. If party_role_code = 'PH' then Party_Identifier refers to policy_holder_id, if party_role_code = 'AG' then Party_Identifier refers to agent_id. Should be used in coordination with party_identifier"
-        type: categorical
-
-        
+        dimension:
+          type: categorical

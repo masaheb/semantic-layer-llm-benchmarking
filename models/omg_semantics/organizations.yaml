@@ -1,33 +1,43 @@
-semantic_models:
-  - name: organization
-    model: ref('organizations')
+models:
+  - name: organizations
+    semantic_model:
+      enabled: true
+      name: organizations
     description: "A table containing information about various organizations, including identifiers and industry classifications."
-    entities:
-      - name: organization
-        type: primary
-        expr: Organization_Identifier
-    dimensions:
-      - name: industry_code
-        type: categorical
-        expr: Industry_Code
-      - name: organization_name
-        type: categorical
-        expr: Organization_Name
-      - name: dun_and_bradstreet_identifier
-        type: categorical
-        expr: Dun_And_Bradstreet_Identifier
-      - name: organization_type_code
-        type: categorical
-        expr: Organization_Type_Code
-      - name: alternate_name
-        type: categorical
-        expr: Alternate_Name
-      - name: organization_description
-        type: categorical
-        expr: Organization_Description
-      - name: acronym_name
-        type: categorical
-        expr: Acronym_Name
-      - name: industry_type_code
-        type: categorical
-        expr: Industry_Type_Code
+    columns:
+      - name: Organization_Identifier
+        entity:
+          type: primary
+          name: organization
+      - name: Industry_Code
+        dimension:
+          type: categorical
+          name: industry_code
+      - name: Organization_Name
+        dimension:
+          type: categorical
+          name: organization_name
+      - name: Dun_And_Bradstreet_Identifier
+        dimension:
+          type: categorical
+          name: dun_and_bradstreet_identifier
+      - name: Organization_Type_Code
+        dimension:
+          type: categorical
+          name: organization_type_code
+      - name: Alternate_Name
+        dimension:
+          type: categorical
+          name: alternate_name
+      - name: Organization_Description
+        dimension:
+          type: categorical
+          name: organization_description
+      - name: Acronym_Name
+        dimension:
+          type: categorical
+          name: acronym_name
+      - name: Industry_Type_Code
+        dimension:
+          type: categorical
+          name: industry_type_code

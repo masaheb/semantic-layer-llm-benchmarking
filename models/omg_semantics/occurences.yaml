@@ -1,37 +1,40 @@
-semantic_models:
-  - name: occurrence_events
-    model: ref('occurrences')
+models:
+  - name: occurrences
+    semantic_model:
+      enabled: true
+      name: occurrences
     description: "Details of various occurrences including dates, times, and locations."
-    defaults:
-      # Assuming Occurrence_Begin_Date is the most relevant date for aggregation
-      agg_time_dimension: occurrence_begin_date
-    entities:
-      - name: occurrence
-        type: primary
-        expr: Occurrence_Identifier
-      - name: geographic_location_identifier
-        type: foreign
-        expr: Geographic_Location_Identifier
-    dimensions:
-      - name: catastrophic_event_indicator
-        type: categorical
-        expr: Catastrophic_Event_Indicator
+    agg_time_dimension: occurrence_begin_date
+    columns:
+      - name: Occurrence_Identifier
+        entity:
+          type: primary
+          name: occurrence
+      - name: Geographic_Location_Identifier
+        entity:
+          type: foreign
+          name: geographic_location_identifier
+      - name: Catastrophic_Event_Indicator
+        dimension:
+          type: categorical
+          name: catastrophic_event_indicator
       - name: occurrence_begin_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: occurrence_end_date
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: occurrence_begin_time
-        type: time
-        type_params:
-          time_granularity: day
+        dimension:
+          type: time
+        granularity: day
       - name: occurrence_end_time
-        type: time
-        type_params:
-          time_granularity: day
-      - name: occurrence_name
-        type: categorical
-        expr: Occurrence_Name
+        dimension:
+          type: time
+        granularity: day
+      - name: Occurrence_Name
+        dimension:
+          type: categorical
+          name: occurrence_name

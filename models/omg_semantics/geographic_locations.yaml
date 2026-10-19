@@ -1,33 +1,42 @@
-semantic_models:
+models:
   - name: geographic_location
+    semantic_model:
+      enabled: true
     description: "This semantic model represents various geographic locations along with their identifiers and types."
-    model: ref('geographic_location')
-    entities:
-      - name: geographic_location
-        type: primary
-        expr: Geographic_Location_Identifier
-      - name: location_address
-        type: foreign
-        expr: Location_Address_Identifier
-    dimensions:
-      - name: parent_geographic_location
-        type: categorical
-        expr: Parent_Geographic_Location_Identifier
-      - name: geographic_location_type
-        type: categorical
-        expr: Geographic_Location_Type_Code
-      - name: location_code
-        type: categorical
-        expr: Location_Code
-      - name: location_name
-        type: categorical
-        expr: Location_Name
-      - name: location_number
-        type: categorical
-        expr: Location_Number
-      - name: state_code
-        type: categorical
-        expr: State_Code
-      - name: physical_location
-        type: categorical
-        expr: Physical_Location_Identifier
+    columns:
+      - name: Geographic_Location_Identifier
+        entity:
+          type: primary
+          name: geographic_location
+      - name: Location_Address_Identifier
+        entity:
+          type: foreign
+          name: location_address
+      - name: Parent_Geographic_Location_Identifier
+        dimension:
+          type: categorical
+          name: parent_geographic_location
+      - name: Geographic_Location_Type_Code
+        dimension:
+          type: categorical
+          name: geographic_location_type
+      - name: Location_Code
+        dimension:
+          type: categorical
+          name: location_code
+      - name: Location_Name
+        dimension:
+          type: categorical
+          name: location_name
+      - name: Location_Number
+        dimension:
+          type: categorical
+          name: location_number
+      - name: State_Code
+        dimension:
+          type: categorical
+          name: state_code
+      - name: Physical_Location_Identifier
+        dimension:
+          type: categorical
+          name: physical_location

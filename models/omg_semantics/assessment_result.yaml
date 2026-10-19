@@ -1,11 +1,14 @@
-semantic_models:
+models:
   - name: assessment_result
-    model: ref('assessment_result')
-    entities:
+    semantic_model:
+      enabled: true
+    columns:
       - name: assessment_result_identifier
-        type: primary
+        entity:
+          type: primary
       - name: assessment_sdentifier
-        type: foreign
-    dimensions:
+        entity:
+          type: foreign
       - name: assessment_result_type_code
-        type: categorical
+        dimension:
+          type: categorical

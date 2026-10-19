@@ -1,15 +1,20 @@
-semantic_models:
+models:
   - name: catastrophe
-    model: ref('catastrophe')
-    entities:
+    semantic_model:
+      enabled: true
+    columns:
       - name: catastrophe_identifier
-        type: primary
-    dimensions:
+        entity:
+          type: primary
       - name: catastrophe_type_code
-        type: categorical
+        dimension:
+          type: categorical
       - name: catastrophe_name
-        type: categorical
+        dimension:
+          type: categorical
       - name: industry_catastrophe_code
-        type: categorical
+        dimension:
+          type: categorical
       - name: company_catastrophe_code
-        type: categorical
+        dimension:
+          type: categorical

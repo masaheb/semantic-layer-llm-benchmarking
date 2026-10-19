@@ -1,12 +1,14 @@
-semantic_models:
+models:
   - name: expense_reserve
-    model: ref('expense_reserve')
+    semantic_model:
+      enabled: true
     description: "Table containting expense_reserve information."
-    entities:
-      - name: claim_amount
-        type: primary
-        expr: Claim_Amount_Identifier
-    dimensions:
-      - name: has_expense_reserve
-        type: categorical
-        expr: "1"
+    columns:
+      - name: Claim_Amount_Identifier
+        entity:
+          type: primary
+          name: claim_amount
+      - name: "1"
+        dimension:
+          type: categorical
+          name: has_expense_reserve
