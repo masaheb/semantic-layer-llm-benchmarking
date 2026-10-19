@@ -7,9 +7,11 @@ models:
         entity:
           type: primary
           name: policy
-      - name: party_identifier
-        entity:
-          type: foreign
+     - name: party_identifier
+       entity:
+         type: primary
+         name: assessment_party_role
+
         dimension:
           type: categorical
           name: party_identifier_dim
