@@ -37,3 +37,5 @@ models:
       +materialized: view
 seeds:
   +schema: _seed
+flags:
+  require_generic_test_arguments_property: true
