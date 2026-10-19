@@ -6,7 +6,8 @@ models:
     columns:
       - name: party_identifier
         entity:
-          type: foreign
+          type: primary
+          name: assessment_party_role
       - name: assessment_identifier
         entity:
           type: foreign
