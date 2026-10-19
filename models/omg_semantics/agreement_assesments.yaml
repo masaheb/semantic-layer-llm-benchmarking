@@ -3,6 +3,7 @@ models:
     semantic_model:
       enabled: true
       name: agreement_assessment
+      primary_entity: agreement_assessment
     columns:
       - name: agreement_identifier
         entity:
