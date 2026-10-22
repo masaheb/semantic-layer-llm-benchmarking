@@ -1,0 +1,51 @@
+models:
+  - name: policy_holder_policy
+    semantic_model:
+      enabled: true
+    description: Relationship between policy holders and their policies
+    agg_time_dimension: policy_effective_date
+    columns:
+      - name: party_identifier
+        entity:
+          type: primary
+        dimension:
+          type: categorical
+          name: party_identifier_dim
+      - name: policy_identifier
+        entity:
+          type: foreign
+          name: policy
+      - name: party_name
+        dimension:
+          type: categorical
+      - name: policy_number
+        dimension:
+          type: categorical
+      - name: party_type_code
+        dimension:
+          type: categorical
+      - name: policy_status_code
+        dimension:
+          type: categorical
+      - name: policy_effective_date
+        dimension:
+          type: time
+        granularity: day
+      - name: relationship_effective_date
+        dimension:
+          type: time
+        granularity: day
+    metrics:
+      - name: policies_per_holder
+        agg: count_distinct
+        expr: policy_identifier
+        description: Number of distinct policies per policy holder
+
+        type: simple
+        hidden: true
+      - name: policy_holder_count
+        agg: count_distinct
+        expr: party_identifier
+        description: Number of distinct policy holders
+        type: simple
+        hidden: true

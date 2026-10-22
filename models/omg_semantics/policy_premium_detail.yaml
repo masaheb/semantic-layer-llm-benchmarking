@@ -1,0 +1,52 @@
+models:
+  - name: policy_premium_detail
+    semantic_model:
+      enabled: true
+    description: Policy premium detail at policy_amount grain for policy size calculations
+    agg_time_dimension: amount_effective_date
+    columns:
+      - name: policy_identifier
+        entity:
+          type: primary
+          name: policy
+      - name: policy_amount_identifier
+        entity:
+          type: unique
+      - name: amount_type_code
+        dimension:
+          type: categorical
+      - name: insurance_type_code
+        dimension:
+          type: categorical
+      - name: amount_effective_date
+        dimension:
+          type: time
+        granularity: day
+    metrics:
+      - name: total_premium
+        description: Total premium amount across all policies
+        type: simple
+        label: Total Premium
+        agg: sum
+        expr: policy_amount
+      - name: total_policies
+        description: Total distinct count of policies
+        type: simple
+        label: Total Policies
+        agg: count_distinct
+        expr: policy_identifier
+      - name: premium_line_count
+        agg: count
+        expr: policy_amount_identifier
+        description: Count of premium line items
+
+        type: simple
+        hidden: true
+      - name: average_policy_size
+        description: Average policy size calculated as total premium divided by number of distinct policies
+        type: derived
+        label: Average Policy Size
+        expr: total_premium / total_policies
+        input_metrics:
+          - name: total_premium
+          - name: total_policies

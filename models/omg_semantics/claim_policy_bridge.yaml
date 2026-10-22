@@ -1,0 +1,35 @@
+models:
+  - name: claim_policy_bridge
+    semantic_model:
+      enabled: true
+    description: Bridge table linking claims to policies for analysis
+    agg_time_dimension: policy_effective_date
+    columns:
+      - name: claim_identifier
+        entity:
+          type: primary
+      - name: policy_identifier
+        entity:
+          type: foreign
+          name: policy
+      - name: policy_number
+        dimension:
+          type: categorical
+      - name: policy_effective_date
+        dimension:
+          type: time
+        granularity: day
+    metrics:
+      - name: claims_by_policy
+        agg: count
+        expr: claim_identifier
+        description: Count of claims associated with policies
+
+        type: simple
+        hidden: true
+      - name: days_to_settle
+        agg: average
+        expr: datediff('day', claim_open_date, claim_close_date)
+        description: Average days from claim open to close
+        type: simple
+        hidden: true
