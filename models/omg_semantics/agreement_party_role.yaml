@@ -2,6 +2,7 @@ models:
   - name: agreement_party_role
     semantic_model:
       enabled: true
+    agg_time_dimension: effective_date
     columns:
       - name: agreement_identifier
         entity:
