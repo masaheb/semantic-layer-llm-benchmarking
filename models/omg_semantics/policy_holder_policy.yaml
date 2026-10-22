@@ -37,15 +37,14 @@ models:
         granularity: day
     metrics:
       - name: policies_per_holder
+        label: Policies per policy holder
         agg: count_distinct
         expr: policy_identifier
-        description: Number of distinct policies per policy holder
-
+        description: Number of distinct policies, grouped by policy holder (party_identifier_dim).
         type: simple
-        hidden: true
       - name: policy_holder_count
+        label: Policy holder count
         agg: count_distinct
         expr: party_identifier
-        description: Number of distinct policy holders
+        description: Number of distinct policy holders.
         type: simple
-        hidden: true

@@ -24,3 +24,13 @@ models:
       - name: party_role_code
         dimension:
           type: categorical
+    metrics:
+      - name: policies_by_party_role
+        label: Policies by party (agent/holder)
+        agg: count_distinct
+        expr: agreement_identifier
+        description: >-
+          Distinct policies associated with a party. Group by party_identifier_dim
+          and filter party_role_code ('AG' = agent, 'PH' = policy holder) to get
+          policies sold per agent or held per policy holder.
+        type: simple
